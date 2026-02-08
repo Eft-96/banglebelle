@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - BangleBelle</title>
+    <meta name="description"
+        content="Contact BangleBelle for custom orders, sizing help, or inquiries. Message us on WhatsApp or follow us on social media.">
+    <meta name="keywords" content="contact BangleBelle, custom bangle orders, bangle sizing help, BangleBelle support">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://banglebelle.netlify.app/contact.html">
+    <meta property="og:title" content="Contact Us - BangleBelle">
+    <meta property="og:description"
+        content="Contact BangleBelle for custom orders, sizing help, or inquiries. Message us on WhatsApp.">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://banglebelle.netlify.app/contact.html">
+    <meta property="twitter:title" content="Contact Us - BangleBelle">
+    <meta property="twitter:description"
+        content="Contact BangleBelle for custom orders, sizing help, or inquiries. Message us on WhatsApp.">
+
+    <link rel="canonical" href="https://banglebelle.netlify.app/contact.html">
+
+    <!-- Structured Data: Breadcrumb -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://banglebelle.netlify.app/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Contact",
+        "item": "https://banglebelle.netlify.app/contact.html"
+      }]
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav">
+            <!-- Left: Hamburger & Logo -->
+            <div class="nav-left">
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="logo-container">
+                    <img src="logo.png" alt="BangleBelle Logo" width="40">
+                    <span class="brand-name">BangleBelle</span>
+                </div>
+            </div>
+
+            <!-- Middle: Desktop Nav -->
+            <ul class="nav-links desktop-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+
+            <!-- Right: Icons -->
+            <div class="nav-icons">
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <a href="cart.html" class="icon-btn">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container" id="searchContainer">
+                <div class="search-wrapper">
+                    <div class="search-input-group">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search for bangles...">
+                        <button class="search-action-btn" id="searchSubmitBtn">Search</button>
+                    </div>
+
+                    <div id="searchMessage" class="search-message"></div>
+
+                    <div class="search-suggestions">
+                        <span
+                            style="width: 100%; text-align: center; font-size: 0.8rem; color: #888; margin-bottom: 5px;">Suggested
+                            Collections:</span>
+                        <a href="collections.html?filter=new-arrivals" class="suggestion-pill">New Arrivals</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Custom & Bridal</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Traditional</a>
+                        <a href="collections.html?filter=bracelet-bangles" class="suggestion-pill">Modern</a>
+                        <a href="collections.html?filter=earrings" class="suggestion-pill">Accessories</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Royal Maroon</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Midnight Black</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Blush Pink</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Pearl White</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="brand-name">BangleBelle</span>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <div class="sidebar-menu">
+            <a href="index.html">Home</a>
+
+            <div class="sidebar-dropdown">
+                <button class="sidebar-drop-btn">Collections <span class="arrow">▼</span></button>
+                <div class="sidebar-drop-content">
+                    <a href="collections.html?filter=new-arrivals">New Arrivals</a>
+                    <a href="collections.html?filter=bangles">Bangles</a>
+                    <a href="collections.html?filter=bracelet-bangles">Bracelet Bangles</a>
+                    <a href="collections.html?filter=earrings">Earrings</a>
+                    <a href="collections.html?filter=rings">Rings</a>
+                    <a href="collections.html">View All</a>
+                </div>
+            </div>
+
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="container spacer-bottom"
+            style="padding-top: 120px; text-align: center; min-height: 60vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+            <h1 class="section-title reveal">Get in Touch</h1>
+            <p class="reveal" style="max-width: 600px; margin: 0 auto 40px;">Have a question about a custom order or
+                need
+                help with sizing? We'd love to hear from you.</p>
+
+            <div class="reveal contact-grid">
+                <div class="contact-card-custom">
+                    <h3 class="text-maroon">WhatsApp Us</h3>
+                    <p>For the fastest response, message us directly.</p>
+                    <br>
+                    <a href="https://wa.me/8801734300230" class="btn btn-gold">Chat on WhatsApp</a>
+                </div>
+
+                <div class="contact-card-custom">
+                    <h3 class="text-maroon">Social Media</h3>
+                    <p>Follow us for the latest updates.</p>
+
+                    <div
+                        style="margin-top: 20px; display: flex; flex-direction: column; gap: 10px; align-items: center;">
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/share/1N35WJjuAT/" target="_blank"
+                            style="display: flex; align-items: center; gap: 10px; color: #3b5998; font-weight: 500;">
+                            <svg class="social-icon" viewBox="0 0 24 24" style="fill: #3b5998;">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
+                            Facebook
+                        </a>
+
+                        <!-- Instagram (Restored) -->
+                        <a href="https://instagram.com/__bangle_belle__" target="_blank"
+                            style="display: flex; align-items: center; gap: 10px; color: #E1306C; font-weight: 500;">
+                            <svg class="social-icon" viewBox="0 0 24 24" style="fill:url(#ig-grad);">
+                                <defs>
+                                    <linearGradient id="ig-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" style="stop-color:#405DE6" />
+                                        <stop offset="50%" style="stop-color:#5851DB" />
+                                        <stop offset="100%" style="stop-color:#E1306C" />
+                                    </linearGradient>
+                                </defs>
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                            Instagram
+                        </a>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                &copy; 2026 BangleBelle. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

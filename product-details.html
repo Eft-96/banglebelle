@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Detail | Designer Churi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <meta name="description"
+        content="View details of our handcrafted luxury bangles. High-quality materials, authentic artisan craftsmanship, and available in multiple sizes.">
+    <meta name="keywords" content="buy bangles online, handcrafted bangle details, luxury bangle shop, artisan jewelry">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="product">
+    <meta property="og:url" content="https://banglebelle.netlify.app/product-details.html">
+    <meta property="og:title" content="Product Details - BangleBelle">
+    <meta property="og:description"
+        content="View details of our handcrafted luxury bangles. High-quality materials, authentic artisan craftsmanship.">
+    <meta property="og:image" content="https://banglebelle.netlify.app/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://banglebelle.netlify.app/product-details.html">
+    <meta property="twitter:title" content="Product Details - BangleBelle">
+    <meta property="twitter:description"
+        content="View details of our handcrafted luxury bangles. High-quality materials, authentic artisan craftsmanship.">
+    <meta property="twitter:image" content="https://banglebelle.netlify.app/logo.png">
+
+    <link rel="canonical" href="https://banglebelle.netlify.app/product-details.html">
+
+    <!-- Structured Data: Breadcrumb & Product -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://banglebelle.netlify.app/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Collections",
+        "item": "https://banglebelle.netlify.app/collections.html"
+      },{
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Product Details",
+        "item": "https://banglebelle.netlify.app/product-details.html"
+      }]
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+    <!-- Header (same as index.html) -->
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav">
+            <!-- Left: Hamburger & Logo -->
+            <div class="nav-left">
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="logo-container">
+                    <img src="logo.png" alt="BangleBelle Logo" width="40">
+                    <span class="brand-name">BangleBelle</span>
+                </div>
+            </div>
+
+            <!-- Middle: Desktop Nav -->
+            <ul class="nav-links desktop-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <!-- Right: Icons -->
+            <div class="nav-icons">
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <a href="cart.html" class="icon-btn">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container" id="searchContainer">
+                <div class="search-wrapper">
+                    <div class="search-input-group">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search for bangles...">
+                        <button class="search-action-btn" id="searchSubmitBtn">Search</button>
+                    </div>
+
+                    <div id="searchMessage" class="search-message"></div>
+
+                    <div class="search-suggestions">
+                        <span
+                            style="width: 100%; text-align: center; font-size: 0.8rem; color: #888; margin-bottom: 5px;">Suggested
+                            Collections:</span>
+                        <a href="collections.html?filter=new-arrivals" class="suggestion-pill">New Arrivals</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Bangles</a>
+                        <a href="collections.html?filter=bracelet-bangles" class="suggestion-pill">Bracelet Bangles</a>
+                        <a href="collections.html?filter=earrings" class="suggestion-pill">Earrings</a>
+                        <a href="collections.html?filter=rings" class="suggestion-pill">Rings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="brand-name">BangleBelle</span>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <div class="sidebar-menu">
+            <a href="index.html">Home</a>
+
+            <div class="sidebar-dropdown">
+                <button class="sidebar-drop-btn">Collections <span class="arrow">▼</span></button>
+                <div class="sidebar-drop-content">
+                    <a href="collections.html?filter=new-arrivals">New Arrivals</a>
+                    <a href="collections.html?filter=bangles">Bangles</a>
+                    <a href="collections.html?filter=bracelet-bangles">Bracelet Bangles</a>
+                    <a href="collections.html?filter=earrings">Earrings</a>
+                    <a href="collections.html?filter=rings">Rings</a>
+                    <a href="collections.html">View All</a>
+                </div>
+            </div>
+
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <!-- Product Detail Section -->
+        <section class="product-detail">
+            <div class="container product-container">
+                <!-- Left Side: Gallery -->
+                <div class="product-gallery">
+                    <div class="main-image-wrapper">
+                        <img id="mainProductImage" class="main-image" src="" alt="Product Image">
+                    </div>
+                    <div class="thumbnail-container" id="thumbnailContainer">
+                        <!-- Thumbnails injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Right Side: Info -->
+                <div class="product-info-column">
+                    <h1 id="productName" class="product-title">Loading...</h1>
+                    <p class="product-price" id="productPrice">...</p>
+
+                    <div id="productDescription" class="product-description">
+                        Loading details...
+                    </div>
+
+                    <div class="product-selection">
+                        <span class="product-section-label">Select Size</span>
+                        <div class="size-selector">
+                            <button class="size-btn">24</button>
+                            <button class="size-btn">26</button>
+                            <button class="size-btn">28</button>
+                        </div>
+                    </div>
+
+                    <div class="product-actions">
+                        <button id="addToCartBtn" class="add-to-cart-btn">Add to Cart</button>
+                        <a id="whatsappBtn" href="#" target="_blank" class="whatsapp-order-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.654-.698c.93.597 1.944.895 2.805.895 3.184 0 5.867-2.618 5.867-5.875 0-3.14-2.587-5.766-5.866-5.914zm0 10.457c-.773 0-1.745-.26-2.502-.741l-1.52.417.411-1.503c-.604-.848-.908-1.727-.908-2.669.001-2.43 1.968-4.496 4.606-4.416 2.569 0 4.509 1.99 4.509 4.417-.089 2.55-2.071 4.496-4.603 4.495z" />
+                            </svg>
+                            Buy Now (WhatsApp)
+                        </a>
+                    </div>
+                    <p style="margin-top: 5px; font-size: 0.9em; color: #555;">* Pay the delivery charge first</p>
+
+                    <div class="product-details-extra">
+                        <span class="product-section-label">Product Highlights</span>
+                        <ul class="highlight-list">
+                            <li>Premium handcrafted design</li>
+                            <li>High-quality materials</li>
+                            <li>Authentic bangle craftsmanship</li>
+                            <li>Available in multiple sizes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (same as index.html) -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2023 Designer Churi. Handmade with love in Bangladesh.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

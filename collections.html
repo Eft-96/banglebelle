@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collections - BangleBelle</title>
+    <meta name="description"
+        content="Explore BangleBelle's exclusive collections: Traditional, Modern, Bridal, and Custom bangles. Handcrafted perfection for every occasion.">
+    <meta name="keywords"
+        content="bangle collections, bridal bangles, modern bracelets, traditional churi, handcrafted jewelry collections">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://banglebelle.netlify.app/collections.html">
+    <meta property="og:title" content="Collections - BangleBelle">
+    <meta property="og:description"
+        content="Explore BangleBelle's exclusive collections: Traditional, Modern, Bridal, and Custom bangles.">
+    <meta property="og:image" content="https://banglebelle.netlify.app/new-prod-48.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://banglebelle.netlify.app/collections.html">
+    <meta property="twitter:title" content="Collections - BangleBelle">
+    <meta property="twitter:description"
+        content="Explore BangleBelle's exclusive collections: Traditional, Modern, Bridal, and Custom bangles.">
+    <meta property="twitter:image" content="https://banglebelle.netlify.app/new-prod-48.jpg">
+
+    <link rel="canonical" href="https://banglebelle.netlify.app/collections.html">
+
+    <!-- Structured Data: Breadcrumb -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://banglebelle.netlify.app/index.html"
+      },{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Collections",
+        "item": "https://banglebelle.netlify.app/collections.html"
+      }]
+    }
+    </script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav">
+            <!-- Left: Hamburger & Logo -->
+            <div class="nav-left">
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="logo-container">
+                    <img src="logo.png" alt="BangleBelle Logo" width="40">
+                    <span class="brand-name">BangleBelle</span>
+                </div>
+            </div>
+
+            <!-- Middle: Desktop Nav -->
+            <ul class="nav-links desktop-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collections.html" class="active">Collections</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <!-- Right: Icons -->
+            <div class="nav-icons">
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <a href="cart.html" class="icon-btn">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container" id="searchContainer">
+                <div class="search-wrapper">
+                    <div class="search-input-group">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search for bangles...">
+                        <button class="search-action-btn" id="searchSubmitBtn">Search</button>
+                    </div>
+
+                    <div id="searchMessage" class="search-message"></div>
+
+                    <div class="search-suggestions">
+                        <span
+                            style="width: 100%; text-align: center; font-size: 0.8rem; color: #888; margin-bottom: 5px;">Suggested
+                            Collections:</span>
+                        <a href="collections.html?filter=new-arrivals" class="suggestion-pill">New Arrivals</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Custom & Bridal</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Traditional</a>
+                        <a href="collections.html?filter=bracelet-bangles" class="suggestion-pill">Modern</a>
+                        <a href="collections.html?filter=earrings" class="suggestion-pill">Accessories</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Royal Maroon</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Midnight Black</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Blush Pink</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Pearl White</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="brand-name">BangleBelle</span>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <div class="sidebar-menu">
+            <a href="index.html">Home</a>
+
+            <div class="sidebar-dropdown">
+                <button class="sidebar-drop-btn">Collections <span class="arrow">▼</span></button>
+                <div class="sidebar-drop-content">
+                    <a href="collections.html?filter=new-arrivals">New Arrivals</a>
+                    <a href="collections.html?filter=bangles">Bangles</a>
+                    <a href="collections.html?filter=bracelet-bangles">Bracelet Bangles</a>
+                    <a href="collections.html?filter=earrings">Earrings</a>
+                    <a href="collections.html?filter=rings">Rings</a>
+                    <a href="collections.html">View All</a>
+                </div>
+            </div>
+
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <main>
+        <div class="container spacer-bottom" style="padding-top: 120px; padding-bottom: 80px; text-align: center;">
+            <h1 class="section-title reveal">Our Collections</h1>
+
+            <!-- Filter Bar -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="new-arrivals">New Arrivals</button>
+                <button class="filter-btn" data-filter="bangles">Bangles</button>
+                <button class="filter-btn" data-filter="bracelet-bangles">Bracelet Bangles</button>
+                <button class="filter-btn" data-filter="earrings">Earrings</button>
+                <button class="filter-btn" data-filter="rings">Rings</button>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="product-grid" class="product-grid">
+                <!-- Populated by script.js -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                &copy; 2026 BangleBelle. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
