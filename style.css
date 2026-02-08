@@ -1306,21 +1306,6 @@ footer {
 
 /* --- About Page Redesign (New Additions) --- */
 
-/* Page Header (Shorter Hero for Internal Pages) */
-.page-header {
-    height: 60vh;
-    min-height: 400px;
-    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('hero-banner.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    text-align: center;
-    margin-bottom: 50px;
-}
 
 .page-header-content h1 {
     font-size: 3.5rem;
