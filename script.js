@@ -511,7 +511,7 @@ function checkoutWhatsApp() {
     message += "*(Please confirm your location and pay the delivery charge to confirm your order)*";
 
     // Redirect to WhatsApp
-    const phoneNumber = "8801734300230"; // User provided number
+    const phoneNumber = "8801892144996"; // Updated number
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
 }
@@ -623,7 +623,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 message += "• Outside Dhaka: ৳150\n";
                 message += "*(Please confirm your location)*";
 
-                whatsappBtn.href = `https://wa.me/8801734300230?text=${encodeURIComponent(message)}`;
+                whatsappBtn.href = `https://wa.me/8801892144996?text=${encodeURIComponent(message)}`;
             };
 
             // Initial setup
