@@ -35,7 +35,6 @@ const products = [
     { id: 'b33', name: 'Bangle Set 33', category: 'bangles', price: 400, image: 'new-prod-128.jpg', images: ['new-prod-128.jpg'] },
     { id: 'b34', name: 'Bangle Set 34', category: 'bangles', price: 480, image: 'new-prod-129.jpg', images: ['new-prod-129.jpg'] },
     { id: 'b35', name: 'Bangle 35 Per Piece', category: 'bangles', price: 110, image: 'new-prod-131.jpg', images: ['new-prod-131.jpg'] },
-    { id: 'b36', name: 'Bangle Set 36', category: 'bangles', price: 270, image: 'new-prod-26.jpg', images: ['new-prod-26.jpg', 'new-prod-27.jpg', 'new-prod-29.jpg'] },
     { id: 'b37', name: 'Bangles Set 37', category: 'bangles', price: 180, image: 'new-prod-9.jpg', images: ['new-prod-9.jpg'] },
 
     { id: 'b38', name: 'Bangle Pair 38', category: 'bangles', price: 250, image: 'new-prod-48.jpg', images: ['new-prod-48.jpg', 'new-prod-49.jpg'] },
@@ -65,7 +64,7 @@ const products = [
 
     { id: 'bb6', name: 'Bracelet Bangle 4', category: 'bracelet-bangles', price: 200, image: 'new-prod-113.jpg', images: ['new-prod-113.jpg'] },
 
-    // RINGS (r1 - r9)
+    // RINGS
     { id: 'r1', name: 'Ring Collection 1', category: 'rings', price: 49, image: 'new-prod-71.jpg', images: ['new-prod-71.jpg', 'new-prod-78.jpg'] },
     { id: 'r2', name: 'Ring Collection 2', category: 'rings', price: 70, image: 'new-prod-72.jpg', images: ['new-prod-72.jpg', 'new-prod-76.jpg'] },
     { id: 'r3', name: 'Ring Collection 3', category: 'rings', price: 49, image: 'new-prod-79.jpg', images: ['new-prod-79.jpg', 'new-prod-73.jpg'] },
@@ -74,7 +73,6 @@ const products = [
     { id: 'r6', name: 'Ring Collection 6', category: 'rings', price: 75, image: 'new-prod-94.jpg', images: ['new-prod-94.jpg'] },
     { id: 'r7', name: 'Ring Collection 7', category: 'rings', price: 60, image: 'new-prod-74.jpg', images: ['new-prod-74.jpg'] },
     { id: 'r8', name: 'Ring Collection 8', category: 'rings', price: 75, image: 'new-prod-75.jpg', images: ['new-prod-75.jpg'] },
-    { id: 'r9', name: 'Ring Collection 9', category: 'rings', price: 205, image: 'new-prod-77.jpg', images: ['new-prod-77.jpg'] },
 
     // EARRINGS (e1 - e5)
     { id: 'e1', name: 'Earring Set 1', category: 'earrings', price: 180, image: 'new-prod-1.jpg', images: ['new-prod-1.jpg'] },
