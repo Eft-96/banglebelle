@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owner Dashboard - BangleBelle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        /* Dashboard Specific Internal Styles for quick loading - will also be in style.css */
+        body.dashboard-body {
+            background-color: #f4f7fa;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 100px auto 40px;
+            padding: 0 20px;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .dashboard-header h1 {
+            color: #333;
+            font-size: 1.8rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            border-top: 4px solid var(--primary-color, #d4af37);
+        }
+
+        .stat-card h3 {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #777;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card .value {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #222;
+            margin-top: 10px;
+        }
+
+        .orders-section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .orders-section h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #333;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .orders-table th {
+            background-color: #fafafa;
+            color: #555;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.Pending { background: #fff3cd; color: #856404; }
+        .status-badge.Confirmed { background: #d1ecf1; color: #0c5460; }
+        .status-badge.Shipped { background: #cce5ff; color: #004085; }
+        .status-badge.Delivered { background: #d4edda; color: #155724; }
+
+        .action-btn {
+            background: none;
+            border: 1px solid #ddd;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s;
+        }
+
+        .action-btn:hover {
+            background: #eee;
+        }
+
+        .action-btn.delete-btn {
+            color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .action-btn.delete-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .empty-dashboard {
+            text-align: center;
+            padding: 50px;
+            color: #777;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body class="dashboard-body">
+
+    <!-- Login Overlay -->
+    <div id="login-overlay" style="position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9999; display:flex; justify-content:center; align-items:center; flex-direction:column; backdrop-filter: blur(5px);">
+        <div style="background:#fff; padding:40px; border-radius:12px; box-shadow:0 10px 25px rgba(0,0,0,0.2); text-align:center; max-width: 400px; width: 90%;">
+            <h2 style="margin-top:0; color:#333;">Dashboard Access</h2>
+            <p style="color:#666; font-size:0.9rem; margin-bottom:20px;">Please enter the owner password to access the dashboard.</p>
+            <input type="password" id="admin-password" placeholder="Enter Password" style="padding:12px; width:100%; box-sizing:border-box; border:1px solid #ccc; border-radius:6px; font-size:16px; margin-bottom:15px;">
+            <button onclick="checkAdminPassword()" style="background:#222; color:#fff; border:none; padding:12px 20px; font-size:16px; cursor:pointer; width:100%; border-radius:6px; font-weight:bold;">Login</button>
+            <p id="login-error" style="color:#d9534f; display:none; margin-top:15px; font-size:0.9rem;">Incorrect Password. Try again.</p>
+        </div>
+    </div>
+
+    <!-- Header (simplified for dashboard) -->
+    <header class="header" style="background:#fff;">
+        <div class="container nav">
+            <div class="nav-left">
+                <div class="logo-container">
+                    <img src="logo.png" alt="BangleBelle Logo" width="40" style="margin-right:10px;">
+                    <span class="brand-name">BangleBelle Dashboard</span>
+                </div>
+            </div>
+            <ul class="nav-links desktop-nav">
+                <li><a href="index.html">Live Website</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>Total Orders</h3>
+                <div class="value" id="stat-total-orders">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Revenue</h3>
+                <div class="value">৳<span id="stat-revenue">0</span></div>
+            </div>
+            <div class="stat-card">
+                <h3>Pending Orders</h3>
+                <div class="value" id="stat-pending" style="color: #d97706;">0</div>
+            </div>
+        </div>
+
+        <div class="orders-section">
+            <h2>Recent Orders</h2>
+            
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Customer</th>
+                        <th style="width: 25%">Items & Address</th>
+                        <th style="width: 15%">Payment Info</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="dashboard-orders-list">
+                    <!-- Orders will be populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Dashboard Logic -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script>
+        let unsubscribeFromOrders = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('dashboard_auth') === 'true') {
+                document.getElementById('login-overlay').style.display = 'none';
+                initDashboard();
+            } else {
+                document.getElementById('login-overlay').style.display = 'flex';
+                // Wait for login
+            }
+            
+            // Allow logging in with Enter key
+            const pwdInput = document.getElementById('admin-password');
+            if(pwdInput) {
+                pwdInput.addEventListener('keypress', function(e) {
+                    if(e.key === 'Enter') checkAdminPassword();
+                });
+            }
+        });
+
+        function checkAdminPassword() {
+            const pwd = document.getElementById('admin-password').value;
+            if(pwd === 'admin123') { // Replace with desired password
+                localStorage.setItem('dashboard_auth', 'true');
+                document.getElementById('login-overlay').style.display = 'none';
+                initDashboard();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
+        function initDashboard() {
+            const ordersList = document.getElementById('dashboard-orders-list');
+            const statTotalOrders = document.getElementById('stat-total-orders');
+            const statRevenue = document.getElementById('stat-revenue');
+            const statPending = document.getElementById('stat-pending');
+
+            ordersList.innerHTML = '<tr><td colspan="7"><div class="empty-dashboard">Loading orders from database...</div></td></tr>';
+
+            // Real-time listener for orders collection
+            if (unsubscribeFromOrders) unsubscribeFromOrders();
+            
+            unsubscribeFromOrders = db.collection('orders').orderBy('date', 'desc').onSnapshot((snapshot) => {
+                let orders = [];
+                snapshot.forEach(doc => {
+                    let data = doc.data();
+                    data.firebaseId = doc.id;
+                    orders.push(data);
+                });
+
+                // Calculate Stats
+                statTotalOrders.innerText = orders.length;
+                
+                let revenue = 0;
+                let pendingCount = 0;
+                
+                ordersList.innerHTML = '';
+
+                if (orders.length === 0) {
+                    ordersList.innerHTML = '<tr><td colspan="8"><div class="empty-dashboard">No orders have been placed yet.</div></td></tr>';
+                } else {
+                    orders.forEach(order => {
+                        if(order.status !== 'Cancelled' && order.status !== 'Deleted') {
+                            revenue += order.totalAmount || 0;
+                        }
+                        if(order.status === 'Pending') {
+                            pendingCount++;
+                        }
+
+                        // Format Date
+                        const orderDate = new Date(order.date);
+                        const formattedDate = orderDate.toLocaleDateString() + ' ' + orderDate.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+
+                        // Formatting Items
+                        let itemsHtml = '<ul style="margin: 0; padding-left: 20px; font-size: 0.85rem; color:#555;">';
+                        if (order.items && order.items.length) {
+                            order.items.forEach(item => {
+                                itemsHtml += `<li>${item.quantity}x ${item.name} (৳${item.price})</li>`;
+                            });
+                        }
+                        itemsHtml += '</ul>';
+
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td><strong>${order.id}</strong></td>
+                            <td style="font-size: 0.85rem; color:#666;">${formattedDate}</td>
+                            <td>
+                                <strong>${order.customerName}</strong><br>
+                                <span style="font-size:0.85rem; color:#666;">📞 ${order.customerPhone}</span>
+                            </td>
+                            <td>
+                                ${itemsHtml}
+                                <hr style="border:0; border-top:1px dashed #ddd; margin: 8px 0;">
+                                <span style="font-size:0.85rem; color:#666;">📍 ${order.customerAddress}</span>
+                            </td>
+                            <td>
+                                <div style="font-size:0.85rem; color:#444; background:#f0f7ff; border: 1px solid #cce5ff; padding:8px; border-radius:6px;">
+                                    <strong style="color: #0056b3;">${order.paymentMethod || 'N/A'}</strong><br>
+                                    <span style="display:block; margin-top:5px; font-family: monospace; font-size:0.95rem;">${order.bKashTrxId ? (order.bKashTrxId.includes(order.customerPhone) ? order.bKashTrxId : 'TrxID/Sender: ' + order.bKashTrxId) : 'N/A'}</span>
+                                </div>
+                            </td>
+                            <td><strong>৳${order.totalAmount}</strong></td>
+                            <td><span class="status-badge ${order.status}">${order.status}</span></td>
+                            <td>
+                                <select class="action-btn" onchange="updateOrderStatus('${order.firebaseId}', this.value)" style="margin-bottom:5px;">
+                                    <option value="" disabled selected>Update Status</option>
+                                    <option value="Pending" ${order.status === 'Pending' ? 'disabled' : ''}>Pending</option>
+                                    <option value="Confirmed" ${order.status === 'Confirmed' ? 'disabled' : ''}>Confirmed</option>
+                                    <option value="Shipped" ${order.status === 'Shipped' ? 'disabled' : ''}>Shipped</option>
+                                    <option value="Delivered" ${order.status === 'Delivered' ? 'disabled' : ''}>Delivered</option>
+                                </select>
+                                <br>
+                                <button class="action-btn delete-btn" onclick="deleteOrder('${order.firebaseId}')">Delete</button>
+                            </td>
+                        `;
+                        ordersList.appendChild(tr);
+                    });
+                }
+
+                statRevenue.innerText = revenue.toLocaleString();
+                statPending.innerText = pendingCount;
+            }, (error) => {
+                console.error("Error listening to orders: ", error);
+                ordersList.innerHTML = '<tr><td colspan="7"><div class="empty-dashboard" style="color:red;">Error loading orders. Ensure database rules are configured to allow access.</div></td></tr>';
+            });
+        }
+
+        function updateOrderStatus(firebaseId, newStatus) {
+            db.collection('orders').doc(firebaseId).update({
+                status: newStatus
+            }).catch(error => {
+                console.error("Error updating status: ", error);
+                alert("Failed to update status.");
+            });
+        }
+
+        function deleteOrder(firebaseId) {
+            if(confirm('Are you sure you want to delete this order? This cannot be undone.')) {
+                db.collection('orders').doc(firebaseId).delete().catch(error => {
+                    console.error("Error deleting order: ", error);
+                    alert("Failed to delete order.");
+                });
+            }
+        }
+    </script>
+</body>
+</html>

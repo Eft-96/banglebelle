@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - BangleBelle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav">
+            <!-- Left: Hamburger & Logo -->
+            <div class="nav-left">
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="logo-container">
+                    <img src="logo.png" alt="BangleBelle Logo" width="40">
+                    <span class="brand-name">BangleBelle</span>
+                </div>
+            </div>
+
+            <!-- Middle: Desktop Nav -->
+            <ul class="nav-links desktop-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <!-- Right: Icons -->
+            <div class="nav-icons">
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <a href="track-order.html" class="icon-btn" aria-label="Track Order" title="Track My Order">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                        <path d="M15 18H9"></path>
+                        <path d="M19 18h2a1 1 0 0 0 1-1v-5l-4-4h-3v10"></path>
+                        <circle cx="7" cy="18" r="2"></circle>
+                        <circle cx="17" cy="18" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="cart.html" class="icon-btn">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="search-container" id="searchContainer">
+                <div class="search-wrapper">
+                    <div class="search-input-group">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search for bangles...">
+                        <button class="search-action-btn" id="searchSubmitBtn">Search</button>
+                    </div>
+
+                    <div id="searchMessage" class="search-message"></div>
+
+                    <div class="search-suggestions">
+                        <span
+                            style="width: 100%; text-align: center; font-size: 0.8rem; color: #888; margin-bottom: 5px;">Suggested
+                            Collections:</span>
+                        <a href="collections.html?filter=new-arrivals" class="suggestion-pill">New Arrivals</a>
+                        <a href="collections.html?filter=bangles" class="suggestion-pill">Bangles</a>
+                        <a href="collections.html?filter=bracelet-bangles" class="suggestion-pill">Bracelet Bangles</a>
+                        <a href="collections.html?filter=earrings" class="suggestion-pill">Earrings</a>
+                        <a href="collections.html?filter=rings" class="suggestion-pill">Rings</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="brand-name">BangleBelle</span>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <div class="sidebar-menu">
+            <a href="index.html">Home</a>
+
+            <div class="sidebar-dropdown">
+                <button class="sidebar-drop-btn">Collections <span class="arrow">▼</span></button>
+                <div class="sidebar-drop-content">
+                    <a href="collections.html?filter=new-arrivals">New Arrivals</a>
+                    <a href="collections.html?filter=bangles">Bangles</a>
+                    <a href="collections.html?filter=bracelet-bangles">Bracelet Bangles</a>
+                    <a href="collections.html?filter=earrings">Earrings</a>
+                    <a href="collections.html?filter=rings">Rings</a>
+                    <a href="collections.html">View All</a>
+                </div>
+            </div>
+
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </div>
+    </div>
+
+    <div class="container checkout-page">
+        <div class="checkout-container" id="checkout-container" style="display: block; width: 100%; max-width: 600px; margin: 0 auto; padding-top: 130px; padding-bottom: 50px;">
+            <div class="checkout-card" id="checkout-card">
+                <h2>Checkout</h2>
+                <form id="checkout-form">
+                    <div class="form-group">
+                        <label for="customerName">Name</label>
+                        <input type="text" id="customerName" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerPhone">Phone</label>
+                        <input type="tel" id="customerPhone" placeholder="e.g., 01..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customerAddress">Address</label>
+                        <textarea id="customerAddress" rows="2" placeholder="Full delivery address" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="deliveryZone">Delivery Zone</label>
+                        <select id="deliveryZone" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 1rem;">
+                            <option value="" disabled selected>Select Delivery Zone</option>
+                            <option value="inside">Inside Dhaka (৳100)</option>
+                            <option value="outside">Outside Dhaka (৳150)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Payment Method</label>
+                        <div style="display: flex; gap: 15px; margin-top: 5px; flex-wrap: wrap;">
+                            <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="paymentMethod" value="cod" checked onchange="updateCheckoutTotal()"> Cash on Delivery (COD)
+                            </label>
+                            <label style="font-weight: normal; cursor: pointer; display: flex; align-items: center; gap: 5px;">
+                                <input type="radio" name="paymentMethod" value="online" onchange="updateCheckoutTotal()"> Online Payment (bKash)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="bkash-instructions" style="background-color: #fff9f9; border: 1px solid #ffebeb; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <div id="bkash-msg" style="color: #681616; font-size: 0.95rem; line-height: 1.4; margin-bottom: 12px; font-weight: 500;">
+                            Send <strong id="instruct-amount">৳0</strong> to <strong>01700000000</strong> (bKash) to confirm.
+                        </div>
+                        <input type="text" id="bkashTrxId" placeholder="Sender No. / TrxID" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem;">
+                    </div>
+
+                    <div class="checkout-summary" style="margin: 20px 0; padding: 15px; background: #fafafa; border-radius: 8px; border: 1px solid #eee;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #555;">
+                            <span>Subtotal:</span>
+                            <span>৳<span id="checkout-subtotal">0</span></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px; color: #555;">
+                            <span id="delivery-label">Delivery Charge:</span>
+                            <span>৳<span id="checkout-delivery-charge">0</span></span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 5px; color: #222;">
+                            <span id="total-label">Total to Pay:</span>
+                            <span>৳<span id="checkout-final-total">0</span></span>
+                        </div>
+                    </div>
+
+                    <div class="checkout-buttons">
+                        <button type="submit" class="btn btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px; border-radius: 8px; margin-bottom: 10px;">Place Order Now</button>
+                        <button type="button" onclick="checkoutWhatsApp()" class="btn btn-outline" style="width: 100%; border-radius: 8px; padding: 12px;">Order via WhatsApp</button>
+                    </div>
+                </form>
+            </div>
+            
+            <div id="order-success" class="order-success" style="display: none; text-align: center; padding: 40px;">
+                <div class="success-icon" style="font-size: 4rem; color: #4CAF50;">✓</div>
+                <h2>Order Placed Successfully!</h2>
+                <p>Thank you for shopping with BangleBelle. Your Order ID is <strong id="success-order-id"></strong>.</p>
+                
+                <div id="live-status-card" style="margin: 30px auto; max-width: 600px; padding: 30px; background: #fff; border: 1px solid #eee; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                    <h3 style="margin-top:0; color:var(--color-secondary); font-family:var(--font-heading); margin-bottom:15px;">Live Order Tracker</h3>
+                    <p style="font-size:0.85rem; color:#666; margin-bottom: 30px;">Do not close this page! As soon as we verify your payment, your order status will automatically update below.</p>
+                    
+                    <!-- Checkout Visual Tracker -->
+                    <div class="tracker-container" style="margin-top: 20px; width: 100%;">
+                        <div class="tracker-steps" style="display: flex; align-items: center; justify-content: space-between; position: relative; width: 100%;">
+                            <!-- Background Line between step centers -->
+                            <div style="position: absolute; top: 20px; left: 12.5%; right: 12.5%; height: 4px; background: #eee; z-index: 1;">
+                                <div id="checkout-progress-line" style="width: 0%; height: 100%; background: #4CAF50; transition: width 0.5s;"></div>
+                            </div>
+        
+                            <div class="chk-step" id="chk-step-Pending" style="z-index: 3; text-align: center; width: 25%;">
+                                <div class="chk-icon" style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-secondary); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">1</div>
+                                <div class="chk-label" style="font-size: 0.85rem; font-weight: bold; color: var(--color-secondary);">Pending</div>
+                            </div>
+                            
+                            <div class="chk-step" id="chk-step-Confirmed" style="z-index: 3; text-align: center; width: 25%;">
+                                <div class="chk-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #ddd; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">2</div>
+                                <div class="chk-label" style="font-size: 0.85rem; font-weight: 500; color: #555;">Confirmed</div>
+                            </div>
+                            
+                            <div class="chk-step" id="chk-step-Shipped" style="z-index: 3; text-align: center; width: 25%;">
+                                <div class="chk-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #ddd; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">3</div>
+                                <div class="chk-label" style="font-size: 0.85rem; font-weight: 500; color: #555;">Shipped</div>
+                            </div>
+                            
+                            <div class="chk-step" id="chk-step-Delivered" style="z-index: 3; text-align: center; width: 25%;">
+                                <div class="chk-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #ddd; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">4</div>
+                                <div class="chk-label" style="font-size: 0.85rem; font-weight: 500; color: #555;">Delivered</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="collections.html" class="btn btn-primary" style="margin-top: 10px;">Continue Shopping</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                &copy; 2026 BangleBelle. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

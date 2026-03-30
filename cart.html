@@ -40,6 +40,15 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                 </button>
+                <a href="track-order.html" class="icon-btn" aria-label="Track Order" title="Track My Order">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                        <path d="M15 18H9"></path>
+                        <path d="M19 18h2a1 1 0 0 0 1-1v-5l-4-4h-3v10"></path>
+                        <circle cx="7" cy="18" r="2"></circle>
+                        <circle cx="17" cy="18" r="2"></circle>
+                    </svg>
+                </a>
                 <a href="cart.html" class="icon-btn">
                     🛒
                     <span class="cart-count">0</span>
@@ -108,6 +117,7 @@
                     <th>ID</th>
                     <th>Price</th>
                     <th>Qty</th>
+                    <th>Checkout</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -118,11 +128,6 @@
 
         <div class="cart-total">
             Total: ৳<span id="cart-total">0</span>
-        </div>
-
-        <div style="text-align: right;">
-            <button onclick="checkoutWhatsApp()" class="btn">Checkout on WhatsApp</button>
-            <p style="margin-top: 10px; font-size: 0.9em; color: #555;">* Pay the delivery charge first</p>
         </div>
     </div>
 

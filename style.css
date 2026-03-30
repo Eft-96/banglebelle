@@ -99,7 +99,7 @@ h6 {
 /* Buttons */
 .btn {
     display: inline-block;
-    padding: 12px 28px;
+    padding: 15px 25px;
     background-color: var(--color-secondary);
     color: var(--color-text-light);
     font-family: var(--font-heading);
@@ -140,6 +140,20 @@ h6 {
     color: var(--color-accent);
 }
 
+/* Order Now Button Style */
+.btn-order-now {
+    background-color: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+    flex: 1;
+}
+
+.btn-order-now:hover {
+    background-color: #c49b2d;
+    border-color: #c49b2d;
+    color: white;
+}
+
 /* Layout Containers */
 .container {
     max-width: var(--container-width);
@@ -147,8 +161,12 @@ h6 {
     padding: 0 20px;
 }
 
+main {
+    margin-top: calc(var(--header-height) + 30px);
+}
+
 section {
-    padding: 80px 0;
+    padding: 60px 0;
 }
 
 /* Spacer Utility for Footer Gap */
@@ -1483,11 +1501,13 @@ footer {
     background: var(--color-text-dark);
     color: #fff;
     border: none;
-    padding: 20px;
+    padding: 15px 20px;
     font-weight: 700;
+    font-family: var(--font-heading);
     text-transform: uppercase;
-    letter-spacing: 1px;
-    border-radius: 12px;
+    letter-spacing: 0.5px;
+    border-radius: 2px;
+    font-size: 0.9rem;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -1506,9 +1526,13 @@ footer {
     gap: 10px;
     border: 2px solid #25D366;
     color: #25D366;
-    padding: 20px;
+    padding: 15px 20px;
     font-weight: 700;
-    border-radius: 12px;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.9rem;
+    border-radius: 2px;
     text-decoration: none;
     transition: all 0.3s;
 }
@@ -1885,4 +1909,169 @@ footer {
     .contact-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* --- Direct Checkout Styles --- */
+.checkout-container {
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid #eee;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.checkout-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.checkout-card h2 {
+    margin-bottom: 25px;
+    text-align: left;
+    font-size: 1.6rem;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    transition: all 0.3s;
+    background-color: #fcfcfc;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--color-accent);
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(212,175,55,0.1);
+}
+
+.checkout-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.or-divider {
+    text-align: center;
+    color: #888;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin: 5px 0;
+}
+
+.btn-primary {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.btn-primary:hover {
+    background-color: #b5952f;
+    border-color: #b5952f;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212,175,55,0.2);
+}
+
+.btn-whatsapp {
+    background-color: #25D366;
+    border-color: #25D366;
+    color: #fff;
+    width: 100%;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.btn-whatsapp:hover {
+    background-color: #1ebe5d;
+    border-color: #1ebe5d;
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(37,211,102,0.2);
+}
+
+.delivery-note {
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: #777;
+    text-align: center;
+}
+
+.order-success {
+    background: white;
+    padding: 50px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.success-icon {
+    width: 80px;
+    height: 80px;
+    background: #d4edda;
+    color: #28a745;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 20px;
+}
+
+.order-success h2 {
+    color: #28a745;
+    margin-bottom: 15px;
+    font-family: var(--font-heading);
+    font-size: 2rem;
+}
+
+.order-success p {
+    color: #555;
+    margin-bottom: 25px;
+    line-height: 1.6;
+    font-size: 1.1rem;
 }

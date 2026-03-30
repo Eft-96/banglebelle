@@ -241,6 +241,18 @@ function addToCart(productId) {
 }
 
 /**
+ * Direct checkout for 'Order Now' button.
+ */
+function orderNow() {
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get('id');
+    if (productId) {
+        addToCart(productId);
+        window.location.href = 'checkout.html';
+    }
+}
+
+/**
  * Update cart count in header.
  */
 function updateCartCount() {
@@ -420,10 +432,13 @@ function renderCart() {
     cartItemsContainer.innerHTML = '';
 
     let total = 0;
+    const checkoutContainer = document.getElementById('checkout-container');
 
     if (cart.length === 0) {
-        cartItemsContainer.innerHTML = '<tr><td colspan="5" style="text-align:center;">Your cart is empty.</td></tr>';
+        cartItemsContainer.innerHTML = '<tr><td colspan="6" style="text-align:center;">Your cart is empty.</td></tr>';
+        if (checkoutContainer) checkoutContainer.style.display = 'none';
     } else {
+        if (checkoutContainer) checkoutContainer.style.display = 'block';
         cart.forEach(item => {
             const itemTotal = item.price * item.quantity;
             total += itemTotal;
@@ -445,6 +460,9 @@ function renderCart() {
                         <button onclick="updateQuantity('${item.id}', 1)" style="padding: 2px 8px;">+</button>
                     </div>
                 </td>
+                <td>
+                    <button onclick="scrollToCheckout()" style="padding: 6px 12px; background-color: var(--primary-color, #c8a165); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.9rem;">Checkout</button>
+                </td>
                 <td><button onclick="removeFromCart('${item.id}')" style="color: red; background: none; border: none; cursor: pointer;">✕</button></td>
             `;
             cartItemsContainer.appendChild(tr);
@@ -452,6 +470,66 @@ function renderCart() {
     }
 
     cartTotalElement.innerText = total;
+
+    // Update checkout summary
+    const subtotalEl = document.getElementById('checkout-subtotal');
+    if (subtotalEl) {
+        subtotalEl.innerText = total;
+        updateCheckoutTotal(total);
+    }
+}
+
+function updateCheckoutTotal(cartTotal = null) {
+    if (cartTotal === null) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cartTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    }
+    const zone = document.getElementById('deliveryZone');
+    const chargeEl = document.getElementById('checkout-delivery-charge');
+    const finalEl = document.getElementById('checkout-final-total');
+    const bkashMsgEl = document.getElementById('bkash-msg');
+    const totalLabel = document.getElementById('total-label');
+    const deliveryLabel = document.getElementById('delivery-label');
+    
+    if (!zone || !chargeEl || !finalEl) return;
+
+    let deliveryCharge = 0;
+    if (zone.value === 'inside') deliveryCharge = 100;
+    else if (zone.value === 'outside') deliveryCharge = 150;
+
+    let totalToPay = cartTotal + deliveryCharge;
+
+    chargeEl.innerText = deliveryCharge;
+
+    // Check payment method
+    let paymentMethod = 'cod';
+    const checkedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+    if (checkedMethod) {
+        paymentMethod = checkedMethod.value;
+    }
+
+    if (paymentMethod === 'cod') {
+        finalEl.innerText = cartTotal;
+        if(totalLabel) totalLabel.innerText = 'Due on Delivery:';
+        if(deliveryLabel) deliveryLabel.innerText = 'Delivery Charge (Paid Upfront):';
+        
+        if (bkashMsgEl) {
+            bkashMsgEl.innerHTML = `
+                Send <strong id="instruct-amount">৳${deliveryCharge}</strong> to <strong>01700000000</strong> (bKash) to confirm.
+                <div style="font-size:0.8rem; color:#888; margin-top:5px;">Remaining ৳${cartTotal} due on delivery.</div>
+            `;
+        }
+    } else {
+        finalEl.innerText = totalToPay;
+        if(totalLabel) totalLabel.innerText = 'Total to Pay Now:';
+        if(deliveryLabel) deliveryLabel.innerText = 'Delivery Charge:';
+        
+        if (bkashMsgEl) {
+            bkashMsgEl.innerHTML = `
+                Send <strong id="instruct-amount">৳${totalToPay}</strong> to <strong>01700000000</strong> (bKash) to confirm.
+            `;
+        }
+    }
 }
 
 function updateQuantity(productId, change) {
@@ -475,6 +553,10 @@ function removeFromCart(productId) {
     localStorage.setItem('cart', JSON.stringify(newCart));
     renderCart();
     updateCartCount();
+}
+
+function scrollToCheckout() {
+    window.location.href = 'checkout.html';
 }
 
 function checkoutWhatsApp() {
@@ -504,7 +586,7 @@ function checkoutWhatsApp() {
     message += `*Subtotal:* ৳${total}\n`;
     message += "----------------------------\n";
     message += "*Delivery Charges:*\n";
-    message += "• Inside Dhaka: ৳80\n";
+    message += "• Inside Dhaka: ৳100\n";
     message += "• Outside Dhaka: ৳150\n";
     message += "*(Please confirm your location and pay the delivery charge to confirm your order)*";
 
@@ -516,7 +598,27 @@ function checkoutWhatsApp() {
 
 // Initial Render for Cart Page
 if (window.location.pathname.includes('cart.html')) {
-    document.addEventListener('DOMContentLoaded', renderCart);
+    document.addEventListener('DOMContentLoaded', () => {
+        renderCart();
+    });
+}
+
+// Initial Render for Checkout Page
+if (window.location.pathname.includes('checkout.html')) {
+    document.addEventListener('DOMContentLoaded', () => {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length === 0) {
+            alert('Your cart is empty! Redirecting to shop.');
+            window.location.href = 'collections.html';
+            return;
+        }
+
+        updateCheckoutTotal();
+        const zoneSelect = document.getElementById('deliveryZone');
+        if (zoneSelect) {
+            zoneSelect.addEventListener('change', () => updateCheckoutTotal());
+        }
+    });
 }
 
 
@@ -617,7 +719,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 message += `*Subtotal:* ৳${product.price}\n`;
                 message += "----------------------------\n";
                 message += "*Delivery Charges:*\n";
-                message += "• Inside Dhaka: ৳80\n";
+                message += "• Inside Dhaka: ৳100\n";
                 message += "• Outside Dhaka: ৳150\n";
                 message += "*(Please confirm your location)*";
 
@@ -652,3 +754,235 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
+// Checkout Form Submission Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const checkoutForm = document.getElementById('checkout-form');
+    if (checkoutForm) {
+        checkoutForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+            const zone = document.getElementById('deliveryZone').value;
+
+            if (!zone) {
+                alert('Please select a Delivery Zone.');
+                return;
+            }
+
+            // Calculate total
+            let subtotal = 0;
+            cart.forEach(item => subtotal += item.price * item.quantity);
+            
+            let deliveryCharge = zone === 'inside' ? 100 : 150;
+            let total = subtotal + deliveryCharge;
+
+            // Generate Order ID
+            const orderId = 'ORD-' + Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+
+            const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            const bkashTrxId = document.getElementById('bkashTrxId') ? document.getElementById('bkashTrxId').value : '';
+
+            // Create Order Object
+            const newOrder = {
+                id: orderId,
+                customerName: name,
+                customerPhone: phone,
+                customerAddress: address,
+                items: cart,
+                totalAmount: total,
+                date: new Date().toISOString(),
+                status: 'Pending',
+                paymentMethod: paymentMethod === 'cod' ? 'Cash on Delivery' : 'Full bKash Payment',
+                bKashTrxId: bkashTrxId
+            };
+
+            // Save to Firebase Firestore
+            // Assumes 'db' is available globally from firebase-config.js
+            if(typeof db !== 'undefined') {
+                db.collection('orders').add(newOrder).then((docRef) => {
+                    // Save Order ID for tracking
+                    localStorage.setItem('recentOrderId', orderId);
+
+                    // Clear Cart
+                    localStorage.removeItem('cart');
+                    updateCartCount();
+                    
+                    // UI Updates
+                    const checkoutCard = document.getElementById('checkout-card');
+                    if (checkoutCard) checkoutCard.style.display = 'none';
+                    
+                    const cartTable = document.querySelector('.cart-table');
+                    if (cartTable) cartTable.style.display = 'none';
+                    
+                    const cartTotal = document.querySelector('.cart-total');
+                    if (cartTotal) cartTotal.style.display = 'none';
+                    
+                    const successDiv = document.getElementById('order-success');
+                    if (successDiv) {
+                        successDiv.style.display = 'block';
+                        document.getElementById('success-order-id').innerText = orderId;
+
+                        // Setup Real-time Status listener for Checkout Success Tracking UI
+                        db.collection('orders').doc(docRef.id).onSnapshot((doc) => {
+                            if(doc.exists) {
+                                const currentData = doc.data();
+                                
+                                // Reset checkout styles
+                                const statuses = ['Pending', 'Confirmed', 'Shipped', 'Delivered'];
+                                statuses.forEach(s => {
+                                    const step = document.getElementById('chk-step-' + s);
+                                    if(step) {
+                                        step.querySelector('.chk-icon').style.background = '#ddd';
+                                        step.querySelector('.chk-label').style.color = '#555';
+                                        step.querySelector('.chk-label').style.fontWeight = '500';
+                                    }
+                                });
+
+                                // Update Progress
+                                let progressWidth = '0%';
+                                let activeLevel = 0;
+                                
+                                if (currentData.status === 'Pending') { activeLevel = 1; progressWidth = '0%'; }
+                                else if (currentData.status === 'Confirmed') { activeLevel = 2; progressWidth = '33%'; }
+                                else if (currentData.status === 'Shipped') { activeLevel = 3; progressWidth = '66%'; }
+                                else if (currentData.status === 'Delivered') { activeLevel = 4; progressWidth = '100%'; }
+
+                                const progLine = document.getElementById('checkout-progress-line');
+                                if (progLine) progLine.style.width = progressWidth;
+
+                                for(let i=0; i<activeLevel; i++) {
+                                    const step = document.getElementById('chk-step-' + statuses[i]);
+                                    if(step) {
+                                        step.querySelector('.chk-icon').style.background = 'var(--color-secondary)';
+                                        step.querySelector('.chk-label').style.color = 'var(--color-secondary)';
+                                        step.querySelector('.chk-label').style.fontWeight = 'bold';
+                                    }
+                                }
+                            }
+                        });
+                    }
+                }).catch((error) => {
+                    console.error("Error saving order: ", error);
+                    alert("There was a problem placing your order. Please try again.");
+                });
+            } else {
+                alert("Database connection is not working. Order was not placed.");
+            }
+        });
+    }
+});
+
+// --- Track Order Logic ---
+document.addEventListener('DOMContentLoaded', () => {
+    const trackBtn = document.getElementById('track-order-btn');
+    const trackInput = document.getElementById('track-order-input');
+    
+    if (trackBtn && trackInput) {
+        // Auto-fill from recent order
+        const recentOrder = localStorage.getItem('recentOrderId');
+        if (recentOrder) {
+            trackInput.value = recentOrder;
+            // Optionally auto-track if desired, but user can just click
+        }
+
+        let unsubscribeTracking = null;
+
+        trackBtn.addEventListener('click', () => {
+            const orderIdStr = trackInput.value.trim().toUpperCase();
+            if (!orderIdStr) return;
+
+            const errorMsg = document.getElementById('track-error-msg');
+            const resultBox = document.getElementById('tracking-result');
+            
+            errorMsg.style.display = 'none';
+            resultBox.style.display = 'none';
+
+            if (unsubscribeTracking) {
+                unsubscribeTracking();
+                unsubscribeTracking = null;
+            }
+
+            if(typeof db !== 'undefined') {
+                trackBtn.innerText = 'Searching...';
+                
+                db.collection('orders').where('id', '==', orderIdStr).get().then(snapshot => {
+                    trackBtn.innerText = 'Track';
+                    if (snapshot.empty) {
+                        errorMsg.style.display = 'block';
+                    } else {
+                        resultBox.style.display = 'block';
+                        const doc = snapshot.docs[0];
+                        
+                        // Setup Realtime Listener!
+                        unsubscribeTracking = db.collection('orders').doc(doc.id).onSnapshot(liveDoc => {
+                            if(liveDoc.exists) {
+                                renderTrackingData(liveDoc.data());
+                            }
+                        });
+                    }
+                }).catch(err => {
+                    console.error("Error tracking order", err);
+                    trackBtn.innerText = 'Track';
+                    errorMsg.style.display = 'block';
+                    errorMsg.innerText = 'Error connecting to database.';
+                });
+            }
+        });
+    }
+});
+
+function renderTrackingData(data) {
+    document.getElementById('res-order-id').innerText = data.id;
+    document.getElementById('res-order-date').innerText = new Date(data.date).toLocaleString([], { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+    document.getElementById('res-order-payment').innerText = data.paymentMethod || 'N/A';
+    document.getElementById('res-order-total').innerText = data.totalAmount;
+    document.getElementById('res-order-address').innerText = data.customerAddress;
+
+    const itemsContainer = document.getElementById('res-order-items');
+    itemsContainer.innerHTML = '';
+    if(data.items && data.items.length) {
+        data.items.forEach(it => {
+            itemsContainer.innerHTML += `<div style="padding: 5px 0;"><strong>${it.quantity}x</strong> ${it.name} - ৳${it.price}</div>`;
+        });
+    }
+
+    // Reset styles
+    const statuses = ['Pending', 'Confirmed', 'Shipped', 'Delivered'];
+    statuses.forEach(s => {
+        const step = document.getElementById('track-step-' + s);
+        if(step) {
+            step.querySelector('.track-icon').style.background = '#ddd';
+            step.querySelector('div:last-child').style.color = '#555';
+            step.querySelector('div:last-child').style.fontWeight = '500';
+        }
+    });
+
+    // Update Progress
+    let progressWidth = '0%';
+    let activeLevel = 0;
+    
+    if (data.status === 'Pending') { activeLevel = 1; progressWidth = '0%'; }
+    else if (data.status === 'Confirmed') { activeLevel = 2; progressWidth = '33%'; }
+    else if (data.status === 'Shipped') { activeLevel = 3; progressWidth = '66%'; }
+    else if (data.status === 'Delivered') { activeLevel = 4; progressWidth = '100%'; }
+
+    document.getElementById('tracker-progress-line').style.width = progressWidth;
+
+    for(let i=0; i<activeLevel; i++) {
+        const step = document.getElementById('track-step-' + statuses[i]);
+        if(step) {
+            step.querySelector('.track-icon').style.background = 'var(--color-secondary)';
+            step.querySelector('div:last-child').style.color = 'var(--color-secondary)';
+            step.querySelector('div:last-child').style.fontWeight = 'bold';
+        }
+    }
+}

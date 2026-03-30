@@ -90,6 +90,15 @@
                         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
                     </svg>
                 </button>
+                <a href="track-order.html" class="icon-btn" aria-label="Track Order" title="Track My Order">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                        <path d="M15 18H9"></path>
+                        <path d="M19 18h2a1 1 0 0 0 1-1v-5l-4-4h-3v10"></path>
+                        <circle cx="7" cy="18" r="2"></circle>
+                        <circle cx="17" cy="18" r="2"></circle>
+                    </svg>
+                </a>
                 <a href="cart.html" class="icon-btn">
                     🛒
                     <span class="cart-count">0</span>
@@ -180,14 +189,15 @@
                         </div>
                     </div>
 
-                    <div class="product-actions">
-                        <button id="addToCartBtn" class="add-to-cart-btn">Add to Cart</button>
-                        <a id="whatsappBtn" href="#" target="_blank" class="whatsapp-order-btn">
+                    <div class="product-actions" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button id="orderNowBtn" class="btn btn-order-now" onclick="orderNow()">Order Now</button>
+                        <button id="addToCartBtn" class="add-to-cart-btn" style="flex: 1;">Add to Cart</button>
+                        <a id="whatsappBtn" href="#" target="_blank" class="whatsapp-order-btn" style="flex: 1; min-width: 151px;">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.654-.698c.93.597 1.944.895 2.805.895 3.184 0 5.867-2.618 5.867-5.875 0-3.14-2.587-5.766-5.866-5.914zm0 10.457c-.773 0-1.745-.26-2.502-.741l-1.52.417.411-1.503c-.604-.848-.908-1.727-.908-2.669.001-2.43 1.968-4.496 4.606-4.416 2.569 0 4.509 1.99 4.509 4.417-.089 2.55-2.071 4.496-4.603 4.495z" />
                             </svg>
-                            Buy Now (WhatsApp)
+                            WhatsApp
                         </a>
                     </div>
                     <p style="margin-top: 5px; font-size: 0.9em; color: #555;">* Pay the delivery charge first</p>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Order - BangleBelle</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container nav">
+            <!-- Left: Hamburger & Logo -->
+            <div class="nav-left">
+                <button class="hamburger" id="hamburger">☰</button>
+                <div class="logo-container">
+                    <img src="logo.png" alt="BangleBelle Logo" width="40">
+                    <span class="brand-name">BangleBelle</span>
+                </div>
+            </div>
+
+            <!-- Middle: Desktop Nav -->
+            <ul class="nav-links desktop-nav">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="collections.html">Collections</a></li>
+                <li><a href="about.html">Our Story</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+            <!-- Right: Icons -->
+            <div class="nav-icons">
+                <button class="icon-btn" id="searchBtn" aria-label="Search">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+                <a href="track-order.html" class="icon-btn active" aria-label="Track Order" title="Track My Order">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"></path>
+                        <path d="M15 18H9"></path>
+                        <path d="M19 18h2a1 1 0 0 0 1-1v-5l-4-4h-3v10"></path>
+                        <circle cx="7" cy="18" r="2"></circle>
+                        <circle cx="17" cy="18" r="2"></circle>
+                    </svg>
+                </a>
+                <a href="cart.html" class="icon-btn">
+                    🛒
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+
+            <!-- Search Bar (hidden) -->
+            <div class="search-container" id="searchContainer">
+                <div class="search-wrapper">
+                    <div class="search-input-group">
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search for bangles...">
+                        <button class="search-action-btn" id="searchSubmitBtn">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="brand-name">BangleBelle</span>
+            <button class="close-btn" id="closeSidebar">&times;</button>
+        </div>
+        <div class="sidebar-menu">
+            <a href="index.html">Home</a>
+            <a href="collections.html">Collections</a>
+            <a href="track-order.html">Track Order</a>
+        </div>
+    </div>
+
+    <!-- Main Tracking Box -->
+    <main class="container spacer-bottom" style="padding-top: 120px; max-width: 800px; min-height: 60vh;">
+        <h2 class="section-title" style="margin-bottom: 30px;">Track My Order</h2>
+        
+        <div style="background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                <input type="text" id="track-order-input" placeholder="Enter your Order ID (e.g., ORD-123456)" style="flex:1; padding: 15px; border: 1px solid #ddd; border-radius: 6px; font-family: inherit; font-size: 1rem; outline: none;">
+                <button id="track-order-btn" class="btn btn-primary" style="padding: 15px 30px; border-radius: 6px;">Track</button>
+            </div>
+            <p id="track-error-msg" style="color: #dc3545; display: none; font-size: 0.95rem;">Order not found. Please check your Order ID and try again.</p>
+        </div>
+
+        <!-- Tracking Results Section -->
+        <div id="tracking-result" style="display: none; background: white; padding: 40px 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-top: 30px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid #eee; padding-bottom: 15px;">
+                <h3 style="margin: 0; font-family:var(--font-heading); color: var(--color-secondary);">Order <span id="res-order-id">ORD-123</span></h3>
+                <span id="res-order-date" style="color: #666; font-size: 0.9rem;"></span>
+            </div>
+
+            <!-- Visual Progress Tracker -->
+            <div class="tracker-container">
+                <div class="tracker-steps" style="display: flex; align-items: center; justify-content: space-between; position: relative;">
+                    <!-- Background Line between step centers -->
+                    <div style="position: absolute; top: 20px; left: 12.5%; right: 12.5%; height: 4px; background: #eee; z-index: 1;">
+                        <div id="tracker-progress-line" style="width: 0%; height: 100%; background: #4CAF50; transition: width 0.5s;"></div>
+                    </div>
+
+                    <div class="track-step" id="track-step-Pending" style="z-index: 3; text-align: center; width: 25%;">
+                        <div class="track-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #ddd; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">1</div>
+                        <div style="font-size: 0.85rem; font-weight: 500; color: #555;">Pending</div>
+                    </div>
+                    
+                    <div class="track-step" id="track-step-Confirmed" style="z-index: 3; text-align: center; width: 25%;">
+                        <div class="track-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #ddd; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">2</div>
+                        <div style="font-size: 0.85rem; font-weight: 500; color: #555;">Confirmed</div>
+                    </div>
+                    
+                    <div class="track-step" id="track-step-Shipped" style="z-index: 3; text-align: center; width: 25%;">
+                        <div class="track-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #ddd; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">3</div>
+                        <div style="font-size: 0.85rem; font-weight: 500; color: #555;">Shipped</div>
+                    </div>
+                    
+                    <div class="track-step" id="track-step-Delivered" style="z-index: 3; text-align: center; width: 25%;">
+                        <div class="track-icon" style="width: 40px; height: 40px; border-radius: 50%; background: #ddd; color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold; transition: 0.3s;">4</div>
+                        <div style="font-size: 0.85rem; font-weight: 500; color: #555;">Delivered</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; background: #fafafa; padding: 20px; border-radius: 6px;">
+                <h4 style="margin-bottom: 15px; color: #333;">Order Summary</h4>
+                <div id="res-order-items" style="font-size: 0.95rem; color: #555; margin-bottom: 15px; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+                    <!-- Items populated dynamically -->
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.95rem; color: #555; margin-bottom: 5px;">
+                    <span>Payment Method:</span>
+                    <span id="res-order-payment"></span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1rem; border-top: 1px solid #ddd; padding-top: 10px; margin-top: 5px; color: var(--color-secondary);">
+                    <span>Total Amount:</span>
+                    <span>৳<span id="res-order-total"></span></span>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; font-size: 0.95rem; color: #666; line-height: 1.5;">
+                <strong style="color: #333;">Delivery Address:</strong> <br>
+                <span id="res-order-address"></span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="copyright" style="text-align: center;">
+                &copy; 2026 BangleBelle. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
