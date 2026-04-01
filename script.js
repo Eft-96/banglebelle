@@ -163,7 +163,7 @@ function renderProducts(productsToRender) {
 
         productCard.innerHTML = `
             <div class="product-image">
-                <a href="product-details.html?id=${product.id}" style="display: block; width: 100%; height: 100%;">
+                <a href="product-details?id=${product.id}" style="display: block; width: 100%; height: 100%;">
                     <img src="${product.image}" alt="${product.name} - Handcrafted Bangle" loading="lazy">
                 </a>
                 <div class="product-action">
@@ -171,7 +171,7 @@ function renderProducts(productsToRender) {
                 </div>
             </div>
             <div class="product-info">
-                <a href="product-details.html?id=${product.id}">
+                <a href="product-details?id=${product.id}">
                     <h3>${product.name}</h3>
                 </a>
                 <p class="price">৳${product.price}</p>
@@ -248,7 +248,7 @@ function orderNow() {
     const productId = params.get('id');
     if (productId) {
         addToCart(productId);
-        window.location.href = 'checkout.html';
+        window.location.href = 'checkout';
     }
 }
 
@@ -314,10 +314,10 @@ filterBtns.forEach(btn => {
         if (filterValue === 'all') {
             filterProducts('all');
             // Update URL without reloading
-            window.history.pushState({}, '', 'collections.html');
+            window.history.pushState({}, '', 'collections');
         } else {
             filterProducts('category', filterValue);
-            window.history.pushState({}, '', `collections.html?filter=${filterValue}`);
+            window.history.pushState({}, '', `collections?filter=${filterValue}`);
         }
     });
 });
@@ -351,7 +351,7 @@ if (searchSubmitBtn && searchInput) {
         const query = searchInput.value;
         if (query) {
             // Redirect to collections page with filter if not already there
-            if (!window.location.pathname.includes('collections.html')) {
+            if (!window.location.pathname.includes('collections')) {
                 // Determine if it matches a category to pass correct filter, or allow text search
                 // Simplified: just pass as filter query, or handle text search on collections page?
                 // Current logic maps keywords to categories. 
@@ -367,7 +367,7 @@ if (searchSubmitBtn && searchInput) {
                 }
 
                 if (matchedCategory) {
-                    window.location.href = `collections.html?filter=${matchedCategory}`;
+                    window.location.href = `collections?filter=${matchedCategory}`;
                 } else {
                     // For name search, we might need a separate param or handle it
                     // Let's assume general search isn't strictly category based in URL yet, 
@@ -379,7 +379,7 @@ if (searchSubmitBtn && searchInput) {
                     searchMessage.innerText = `Searching for "${query}"...`;
                     setTimeout(() => {
                         // Fallback to all for now or specific text logic
-                        window.location.href = `collections.html?filter=all`; // ideal: ?search=query
+                        window.location.href = `collections?filter=all`; // ideal: ?search=query
                     }, 500);
                 }
             } else {
@@ -556,7 +556,7 @@ function removeFromCart(productId) {
 }
 
 function scrollToCheckout() {
-    window.location.href = 'checkout.html';
+    window.location.href = 'checkout';
 }
 
 function checkoutWhatsApp() {
@@ -597,19 +597,19 @@ function checkoutWhatsApp() {
 }
 
 // Initial Render for Cart Page
-if (window.location.pathname.includes('cart.html')) {
+if (window.location.pathname.includes('cart')) {
     document.addEventListener('DOMContentLoaded', () => {
         renderCart();
     });
 }
 
 // Initial Render for Checkout Page
-if (window.location.pathname.includes('checkout.html')) {
+if (window.location.pathname.includes('checkout')) {
     document.addEventListener('DOMContentLoaded', () => {
         const cart = JSON.parse(localStorage.getItem('cart')) || [];
         if (cart.length === 0) {
             alert('Your cart is empty! Redirecting to shop.');
-            window.location.href = 'collections.html';
+            window.location.href = 'collections';
             return;
         }
 
@@ -750,7 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
         } else {
-            productDetailContainer.innerHTML = '<div class="container" style="padding: 100px 0; text-align: center;"><h2>Product not found</h2><a href="collections.html" class="btn">Back to Shop</a></div>';
+            productDetailContainer.innerHTML = '<div class="container" style="padding: 100px 0; text-align: center;"><h2>Product not found</h2><a href="collections" class="btn">Back to Shop</a></div>';
         }
     }
 });
