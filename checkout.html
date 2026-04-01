@@ -111,6 +111,15 @@
         <div class="checkout-container" id="checkout-container" style="display: block; width: 100%; max-width: 600px; margin: 0 auto; padding-top: 130px; padding-bottom: 50px;">
             <div class="checkout-card" id="checkout-card">
                 <h2>Checkout</h2>
+                
+                <!-- Order Summary -->
+                <div id="checkout-items-summary" style="margin-bottom: 25px; padding: 15px; background: #fafafa; border-radius: 8px; border: 1px solid #eee;">
+                    <h4 style="margin-top: 0; margin-bottom: 10px; color: #555;">Review Items:</h4>
+                    <div id="checkout-items-list" style="max-height: 200px; overflow-y: auto;">
+                        <!-- Items will be injected here -->
+                    </div>
+                </div>
+
                 <form id="checkout-form">
                     <div class="form-group">
                         <label for="customerName">Name</label>
@@ -148,7 +157,7 @@
 
                     <div id="bkash-instructions" style="background-color: #fff9f9; border: 1px solid #ffebeb; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
                         <div id="bkash-msg" style="color: #681616; font-size: 0.95rem; line-height: 1.4; margin-bottom: 12px; font-weight: 500;">
-                            Send <strong id="instruct-amount">৳0</strong> to <strong>01700000000</strong> (bKash) to confirm.
+                            Send <strong id="instruct-amount">৳0</strong> to <strong>01734300230</strong> (bKash) to confirm.
                         </div>
                         <input type="text" id="bkashTrxId" placeholder="Sender No. / TrxID" required style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem;">
                     </div>

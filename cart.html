@@ -113,8 +113,9 @@
         <table class="cart-table">
             <thead>
                 <tr>
+                    <th><input type="checkbox" id="select-all" checked onchange="selectAllItems(this.checked)"></th>
                     <th>Product</th>
-                    <th>ID</th>
+                    <th>Size</th>
                     <th>Price</th>
                     <th>Qty</th>
                     <th>Checkout</th>
@@ -126,8 +127,14 @@
             </tbody>
         </table>
 
-        <div class="cart-total">
-            Total: ৳<span id="cart-total">0</span>
+        <div class="cart-summary-actions" style="display: flex; justify-content: space-between; align-items: center; margin-top: 20px; gap: 20px; flex-wrap: wrap;">
+            <div class="cart-total" style="margin: 0; font-size: 1.5rem;">
+                Total: ৳<span id="cart-total">0</span>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="checkoutAll()" class="btn btn-outline">Checkout All</button>
+                <button onclick="checkoutSelected()" class="btn btn-primary" style="padding: 12px 30px;">Checkout Selected</button>
+            </div>
         </div>
     </div>
 
