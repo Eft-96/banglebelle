@@ -222,18 +222,19 @@ function filterProducts(filterType, value) {
 /**
  * Add item to cart (Local Storage).
  * @param {string} productId 
+ * @param {string} size
  */
-function addToCart(productId) {
+function addToCart(productId, size = "N/A") {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const existingItem = cart.find(item => item.id === productId);
+    const existingItem = cart.find(item => item.id === productId && (item.size === size || (!item.size && size === "N/A")));
 
     if (existingItem) {
         existingItem.quantity += 1;
     } else {
-        cart.push({ ...product, quantity: 1 });
+        cart.push({ ...product, size: size, quantity: 1 });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -453,15 +454,15 @@ function renderCart() {
                 <td>৳${item.price}</td>
                 <td>
                     <div style="display: flex; align-items: center; gap: 5px;">
-                        <button onclick="updateQuantity('${item.id}', '${item.size}', -1)" style="padding: 2px 8px;">-</button>
+                        <button onclick="updateQuantity(${index}, -1)" style="padding: 2px 8px;">-</button>
                         <span>${item.quantity}</span>
-                        <button onclick="updateQuantity('${item.id}', '${item.size}', 1)" style="padding: 2px 8px;">+</button>
+                        <button onclick="updateQuantity(${index}, 1)" style="padding: 2px 8px;">+</button>
                     </div>
                 </td>
                 <td>
                     <button onclick="checkoutSingleItem(${index})" style="padding: 6px 12px; background-color: var(--primary-color, #c8a165); color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Checkout</button>
                 </td>
-                <td><button onclick="removeFromCart('${item.id}', '${item.size}')" style="color: red; background: none; border: none; cursor: pointer;">✕</button></td>
+                <td><button onclick="removeFromCart(${index})" style="color: red; background: none; border: none; cursor: pointer;">✕</button></td>
             `;
             cartItemsContainer.appendChild(tr);
         });
@@ -578,14 +579,12 @@ function updateCheckoutTotal(cartTotal = null) {
     }
 }
 
-function updateQuantity(productId, size, change) {
+function updateQuantity(index, change) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const itemIndex = cart.findIndex(item => item.id === productId && item.size === size);
-
-    if (itemIndex > -1) {
-        cart[itemIndex].quantity += change;
-        if (cart[itemIndex].quantity <= 0) {
-            cart.splice(itemIndex, 1);
+    if (cart[index]) {
+        cart[index].quantity += change;
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
         }
         localStorage.setItem('cart', JSON.stringify(cart));
         renderCart();
@@ -593,12 +592,14 @@ function updateQuantity(productId, size, change) {
     }
 }
 
-function removeFromCart(productId, size) {
+function removeFromCart(index) {
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    const newCart = cart.filter(item => !(item.id === productId && item.size === size));
-    localStorage.setItem('cart', JSON.stringify(newCart));
-    renderCart();
-    updateCartCount();
+    if (cart[index]) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+        updateCartCount();
+    }
 }
 
 function selectAllItems(checked) {
