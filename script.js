@@ -122,6 +122,16 @@ const products = [
     { id: 'e4', name: 'Earring Set 4', category: 'earrings', price: 99, image: 'new-prod-13.jpg', images: ['new-prod-13.jpg'] },
     { id: 'e5', name: 'Earring Set 5', category: 'earrings', price: 99, image: 'new-prod-14.jpg', images: ['new-prod-14.jpg'] },
     { id: 'e6', name: 'Earring Set 6', category: 'earrings', price: 200, image: 'ear ring1.jpeg', images: ['ear ring1.jpeg', 'ear ring2.jpeg'] },
+    { id: 'e7', name: 'Earring Set 7', category: 'earrings', price: 150, image: 'Earring Set 7.jpg.jpeg', images: ['Earring Set 7.jpg.jpeg'] },
+    { id: 'e8', name: 'Earring Set 8', category: 'earrings', price: 150, image: 'Earring Set 8.jpg.jpeg', images: ['Earring Set 8.jpg.jpeg'] },
+    { id: 'e9', name: 'Earring Set 9', category: 'earrings', price: 200, image: 'Earring Set 9.jpg.jpeg', images: ['Earring Set 9.jpg.jpeg'] },
+    { id: 'e10', name: 'Earring Set 10', category: 'earrings', price: 250, image: 'Earring Set 10.jpg.jpeg', images: ['Earring Set 10.jpg.jpeg'] },
+    { id: 'e11', name: 'Earring Set 11', category: 'earrings', price: 120, image: 'Earring Set 11.jpg.jpeg', images: ['Earring Set 11.jpg.jpeg'] },
+    { id: 'e12', name: 'Earring Set 12', category: 'earrings', price: 120, image: 'Earring Set 12.jpg.jpeg', images: ['Earring Set 12.jpg.jpeg'] },
+    { id: 'e13', name: 'Earring Set 13', category: 'earrings', price: 120, image: 'Earring Set 13.jpg.jpeg', images: ['Earring Set 13.jpg.jpeg'] },
+    { id: 'e14', name: 'Earring Set 14', category: 'earrings', price: 250, image: 'Earring Set14.jpg.jpeg', images: ['Earring Set14.jpg.jpeg'] },
+    { id: 'e15', name: 'Earring Set 15', category: 'earrings', price: 120, image: 'Earring Set 15.jpg.jpeg', images: ['Earring Set 15.jpg.jpeg'] },
+
 
     // NEW ARRIVALS (n1 - n7)
     { id: 'n1', name: 'New Arrival 1', category: 'new-arrivals', price: 220, image: 'new-prod-2.jpg', images: ['new-prod-2.jpg'] },
@@ -537,7 +547,7 @@ function updateCheckoutTotal(cartTotal = null) {
     const bkashMsgEl = document.getElementById('bkash-msg');
     const totalLabel = document.getElementById('total-label');
     const deliveryLabel = document.getElementById('delivery-label');
-    
+
     if (!zone || !chargeEl || !finalEl) return;
 
     let deliveryCharge = 0;
@@ -557,9 +567,9 @@ function updateCheckoutTotal(cartTotal = null) {
 
     if (paymentMethod === 'cod') {
         finalEl.innerText = cartTotal;
-        if(totalLabel) totalLabel.innerText = 'Due on Delivery:';
-        if(deliveryLabel) deliveryLabel.innerText = 'Delivery Charge (Paid Upfront):';
-        
+        if (totalLabel) totalLabel.innerText = 'Due on Delivery:';
+        if (deliveryLabel) deliveryLabel.innerText = 'Delivery Charge (Paid Upfront):';
+
         if (bkashMsgEl) {
             bkashMsgEl.innerHTML = `
                 Send <strong id="instruct-amount">৳${deliveryCharge}</strong> to <strong>01734300230</strong> (bKash) to confirm.
@@ -568,9 +578,9 @@ function updateCheckoutTotal(cartTotal = null) {
         }
     } else {
         finalEl.innerText = totalToPay;
-        if(totalLabel) totalLabel.innerText = 'Total to Pay Now:';
-        if(deliveryLabel) deliveryLabel.innerText = 'Delivery Charge:';
-        
+        if (totalLabel) totalLabel.innerText = 'Total to Pay Now:';
+        if (deliveryLabel) deliveryLabel.innerText = 'Delivery Charge:';
+
         if (bkashMsgEl) {
             bkashMsgEl.innerHTML = `
                 Send <strong id="instruct-amount">৳${totalToPay}</strong> to <strong>01734300230</strong> (bKash) to confirm.
@@ -660,7 +670,7 @@ if (window.location.pathname.includes('cart')) {
 if (window.location.pathname.includes('checkout')) {
     document.addEventListener('DOMContentLoaded', () => {
         const items = JSON.parse(localStorage.getItem('checkoutItems')) || [];
-        
+
         // If coming from product page "Order Now", checkoutItems is already set.
         // If coming from "Checkout" on cart page, it's also set.
         // If arriving directly, try to use full cart as fallback.
@@ -894,7 +904,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             const items = JSON.parse(localStorage.getItem('checkoutItems')) || [];
             if (items.length === 0) {
                 alert('No items selected for checkout!');
@@ -914,7 +924,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Calculate total
             let subtotal = 0;
             items.forEach(item => subtotal += item.price * item.quantity);
-            
+
             let deliveryCharge = zone === 'inside' ? 100 : 150;
             let total = subtotal + deliveryCharge;
 
@@ -940,7 +950,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Save to Firebase Firestore
             // Assumes 'db' is available globally from firebase-config.js
-            if(typeof db !== 'undefined') {
+            if (typeof db !== 'undefined') {
                 db.collection('orders').add(newOrder).then((docRef) => {
                     // Save Order ID for tracking
                     localStorage.setItem('recentOrderId', orderId);
@@ -948,25 +958,25 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Remove purchased items from cart
                     let cart = JSON.parse(localStorage.getItem('cart')) || [];
                     const items = JSON.parse(localStorage.getItem('checkoutItems')) || [];
-                    
+
                     const newCart = cart.filter(cartItem => {
                         return !items.some(buyItem => buyItem.id === cartItem.id && buyItem.size === cartItem.size);
                     });
-                    
+
                     localStorage.setItem('cart', JSON.stringify(newCart));
                     localStorage.removeItem('checkoutItems');
                     updateCartCount();
-                    
+
                     // UI Updates
                     const checkoutCard = document.getElementById('checkout-card');
                     if (checkoutCard) checkoutCard.style.display = 'none';
-                    
+
                     const cartTable = document.querySelector('.cart-table');
                     if (cartTable) cartTable.style.display = 'none';
-                    
+
                     const cartTotal = document.querySelector('.cart-total');
                     if (cartTotal) cartTotal.style.display = 'none';
-                    
+
                     const successDiv = document.getElementById('order-success');
                     if (successDiv) {
                         successDiv.style.display = 'block';
@@ -974,14 +984,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         // Setup Real-time Status listener for Checkout Success Tracking UI
                         db.collection('orders').doc(docRef.id).onSnapshot((doc) => {
-                            if(doc.exists) {
+                            if (doc.exists) {
                                 const currentData = doc.data();
-                                
+
                                 // Reset checkout styles
                                 const statuses = ['Pending', 'Confirmed', 'Shipped', 'Delivered'];
                                 statuses.forEach(s => {
                                     const step = document.getElementById('chk-step-' + s);
-                                    if(step) {
+                                    if (step) {
                                         step.querySelector('.chk-icon').style.background = '#ddd';
                                         step.querySelector('.chk-label').style.color = '#555';
                                         step.querySelector('.chk-label').style.fontWeight = '500';
@@ -991,7 +1001,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 // Update Progress
                                 let progressWidth = '0%';
                                 let activeLevel = 0;
-                                
+
                                 if (currentData.status === 'Pending') { activeLevel = 1; progressWidth = '0%'; }
                                 else if (currentData.status === 'Confirmed') { activeLevel = 2; progressWidth = '33%'; }
                                 else if (currentData.status === 'Shipped') { activeLevel = 3; progressWidth = '66%'; }
@@ -1000,9 +1010,9 @@ document.addEventListener('DOMContentLoaded', () => {
                                 const progLine = document.getElementById('checkout-progress-line');
                                 if (progLine) progLine.style.width = progressWidth;
 
-                                for(let i=0; i<activeLevel; i++) {
+                                for (let i = 0; i < activeLevel; i++) {
                                     const step = document.getElementById('chk-step-' + statuses[i]);
-                                    if(step) {
+                                    if (step) {
                                         step.querySelector('.chk-icon').style.background = 'var(--color-secondary)';
                                         step.querySelector('.chk-label').style.color = 'var(--color-secondary)';
                                         step.querySelector('.chk-label').style.fontWeight = 'bold';
@@ -1026,7 +1036,7 @@ document.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const trackBtn = document.getElementById('track-order-btn');
     const trackInput = document.getElementById('track-order-input');
-    
+
     if (trackBtn && trackInput) {
         // Auto-fill from recent order
         const recentOrder = localStorage.getItem('recentOrderId');
@@ -1043,7 +1053,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const errorMsg = document.getElementById('track-error-msg');
             const resultBox = document.getElementById('tracking-result');
-            
+
             errorMsg.style.display = 'none';
             resultBox.style.display = 'none';
 
@@ -1052,9 +1062,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 unsubscribeTracking = null;
             }
 
-            if(typeof db !== 'undefined') {
+            if (typeof db !== 'undefined') {
                 trackBtn.innerText = 'Searching...';
-                
+
                 db.collection('orders').where('id', '==', orderIdStr).get().then(snapshot => {
                     trackBtn.innerText = 'Track';
                     if (snapshot.empty) {
@@ -1062,10 +1072,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         resultBox.style.display = 'block';
                         const doc = snapshot.docs[0];
-                        
+
                         // Setup Realtime Listener!
                         unsubscribeTracking = db.collection('orders').doc(doc.id).onSnapshot(liveDoc => {
-                            if(liveDoc.exists) {
+                            if (liveDoc.exists) {
                                 renderTrackingData(liveDoc.data());
                             }
                         });
@@ -1090,7 +1100,7 @@ function renderTrackingData(data) {
 
     const itemsContainer = document.getElementById('res-order-items');
     itemsContainer.innerHTML = '';
-    if(data.items && data.items.length) {
+    if (data.items && data.items.length) {
         data.items.forEach(it => {
             itemsContainer.innerHTML += `<div style="padding: 5px 0;"><strong>${it.quantity}x</strong> ${it.name} - ৳${it.price}</div>`;
         });
@@ -1100,7 +1110,7 @@ function renderTrackingData(data) {
     const statuses = ['Pending', 'Confirmed', 'Shipped', 'Delivered'];
     statuses.forEach(s => {
         const step = document.getElementById('track-step-' + s);
-        if(step) {
+        if (step) {
             step.querySelector('.track-icon').style.background = '#ddd';
             step.querySelector('div:last-child').style.color = '#555';
             step.querySelector('div:last-child').style.fontWeight = '500';
@@ -1110,7 +1120,7 @@ function renderTrackingData(data) {
     // Update Progress
     let progressWidth = '0%';
     let activeLevel = 0;
-    
+
     if (data.status === 'Pending') { activeLevel = 1; progressWidth = '0%'; }
     else if (data.status === 'Confirmed') { activeLevel = 2; progressWidth = '33%'; }
     else if (data.status === 'Shipped') { activeLevel = 3; progressWidth = '66%'; }
@@ -1118,9 +1128,9 @@ function renderTrackingData(data) {
 
     document.getElementById('tracker-progress-line').style.width = progressWidth;
 
-    for(let i=0; i<activeLevel; i++) {
+    for (let i = 0; i < activeLevel; i++) {
         const step = document.getElementById('track-step-' + statuses[i]);
-        if(step) {
+        if (step) {
             step.querySelector('.track-icon').style.background = 'var(--color-secondary)';
             step.querySelector('div:last-child').style.color = 'var(--color-secondary)';
             step.querySelector('div:last-child').style.fontWeight = 'bold';
