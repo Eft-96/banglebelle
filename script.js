@@ -90,8 +90,11 @@ const products = [
     { id: 'b80', name: 'Bangle Set 80', category: 'bangles', price: 350, image: '66.jpeg', images: ['66.jpeg'], hasSize: true },
     { id: 'b81', name: 'Bangle Set 81', category: 'bangles', price: 400, image: '67.jpeg', images: ['67.jpeg'], hasSize: true },
     { id: 'b82', name: 'Bangle Set 82', category: 'bangles', price: 150, image: '68.jpeg', images: ['68.jpeg'], hasSize: true },
-    { id: 'b83', name: 'Bangle Set 83', category: 'bangles', price: 320, image: '69.jpeg', images: ['69.jpeg'], hasSize: true },
     { id: 'b84', name: 'Bangle Set 84', category: 'bangles', price: 400, image: '70.jpeg', images: ['70.jpeg'], hasSize: true },
+    { id: 'b85', name: 'Bangle Set 85', category: 'bangles', price: 150, image: 'Bangle Set 85.jpg.jpeg', images: ['Bangle Set 85.jpg.jpeg'], hasSize: true },
+    { id: 'b86', name: 'Bangle Set 86', category: 'bangles', price: 120, image: 'Bangle Set 86.jpg.jpeg', images: ['Bangle Set 86.jpg.jpeg'], hasSize: true },
+    { id: 'b87', name: 'Bangle Set 87', category: 'bangles', price: 280, image: 'Bangle Set 87.jpg.jpeg', images: ['Bangle Set 87.jpg.jpeg'], hasSize: true },
+    { id: 'b88', name: 'Bangle Set 88', category: 'bangles', price: 300, image: 'Bangle Set 88.jpg.jpeg', images: ['Bangle Set 88.jpg.jpeg'], hasSize: true },
 
     // BRACELET BANGLES (bb1 - bb6)
     { id: 'bb1', name: 'Bracelet Bangle 1', category: 'bracelet-bangles', price: 175, image: 'mordern-churi.jpg', images: ['mordern-churi.jpg'], hasSize: true },
