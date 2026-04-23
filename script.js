@@ -923,6 +923,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const address = document.getElementById('customerAddress').value;
             const zone = document.getElementById('deliveryZone').value;
 
+            if (phone.length !== 11) {
+                alert("Warning: Phone Number must be exactly 11 digits! You entered " + phone.length + " digits. Please enter a valid 11-digit number (e.g., 01XXXXXXXXX).");
+                return;
+            }
+
             if (!zone) {
                 alert('Please select a Delivery Zone.');
                 return;
@@ -940,6 +945,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
             const bkashTrxId = document.getElementById('bkashTrxId') ? document.getElementById('bkashTrxId').value : '';
+
+            if (paymentMethod !== 'cod') {
+                if (bkashTrxId.length !== 11) {
+                    alert("Warning: Sender Number must be exactly 11 digits! You entered " + bkashTrxId.length + " digits. Please enter a valid 11-digit bKash number (e.g., 01XXXXXXXXX).");
+                    return;
+                }
+            }
 
             // Create Order Object
             const newOrder = {
