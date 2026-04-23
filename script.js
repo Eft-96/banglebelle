@@ -117,6 +117,7 @@ const products = [
     { id: 'r10', name: 'Ring Collection 10', category: 'rings', price: 100, image: 'ring 3.jpeg', images: ['ring 3.jpeg'], hasSize: true },
     { id: 'r11', name: 'Ring Collection 11', category: 'rings', price: 100, image: 'ring 4.jpeg', images: ['ring 4.jpeg'], hasSize: true },
     { id: 'r12', name: 'Ring Collection 12', category: 'rings', price: 75, image: 'ring 5.jpeg', images: ['ring 5.jpeg'], hasSize: true },
+    { id: 'r13', name: 'Ring Collection 13', category: 'rings', price: 120, image: 'Ring Collection 13.jpg.jpeg', images: ['Ring Collection 13.jpg.jpeg'], hasSize: true },
 
     // EARRINGS (e1 - e5)
     { id: 'e1', name: 'Earring Set 1', category: 'earrings', price: 180, image: 'new-prod-1.jpg', images: ['new-prod-1.jpg'] },
