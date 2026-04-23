@@ -134,7 +134,10 @@ const products = [
     { id: 'e13', name: 'Earring Set 13', category: 'earrings', price: 120, image: 'Earring Set 13.jpg.jpeg', images: ['Earring Set 13.jpg.jpeg'] },
     { id: 'e14', name: 'Earring Set 14', category: 'earrings', price: 250, image: 'Earring Set14.jpg.jpeg', images: ['Earring Set14.jpg.jpeg'] },
     { id: 'e15', name: 'Earring Set 15', category: 'earrings', price: 120, image: 'Earring Set 15.jpg.jpeg', images: ['Earring Set 15.jpg.jpeg'] },
-
+    { id: 'e16', name: 'Earring Set 16', category: 'earrings', price: 120, image: 'Earring Set 16.png', images: ['Earring Set 16.png'] },
+    { id: 'e17', name: 'Earring Set 17', category: 'earrings', price: 120, image: 'Earring Set 17.png', images: ['Earring Set 17.png'] },
+    { id: 'e18', name: 'Earring Set 18', category: 'earrings', price: 120, image: 'Earring Set 18.png', images: ['Earring Set 18.png'] },
+    { id: 'e19', name: 'Earring Set 19', category: 'earrings', price: 120, image: 'Earring Set 19.png', images: ['Earring Set 19.png'] },
 
     // NEW ARRIVALS (n1 - n7)
     { id: 'n1', name: 'New Arrival 1', category: 'new-arrivals', price: 220, image: 'new-prod-2.jpg', images: ['new-prod-2.jpg'] },
