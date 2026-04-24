@@ -105,6 +105,12 @@ for file, data in files_to_update.items():
         </section>
         <section class="container">
             {data["content"]}
+            
+            <div style="max-width: 800px; margin: 60px auto 0; padding: 25px; background: white; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 5px solid #ecab34;">
+                <h3 style="color: #5a1818; margin-top: 0; margin-bottom: 15px;">About the Team</h3>
+                <p style="margin: 5px 0; font-size: 1.05rem;"><strong>Editor:</strong> Nirob Kobir Efti</p>
+                <p style="margin: 5px 0; font-size: 1.05rem;"><strong>Founder:</strong> Ruhee Nufaisa Oishe</p>
+            </div>
         </section>
     </main>
     '''
