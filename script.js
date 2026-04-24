@@ -751,6 +751,27 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('productDescription').innerText =
                 `Experience the elegance of this handcrafted piece, designed to perfect your look for any occasion.`;
 
+            // Inject SEO JSON-LD Product Schema
+            const schemaData = {
+                "@context": "https://schema.org/",
+                "@type": "Product",
+                "name": product.name,
+                "image": "https://banglebelle.shop/" + product.image,
+                "description": "Experience the elegance of this handcrafted piece, designed to perfect your look for any occasion.",
+                "brand": { "@type": "Brand", "name": "BangleBelle" },
+                "offers": {
+                    "@type": "Offer",
+                    "url": "https://banglebelle.shop/product-details?id=" + product.id,
+                    "priceCurrency": "BDT",
+                    "price": product.price.toString(),
+                    "availability": "https://schema.org/InStock"
+                }
+            };
+            const scriptTarget = document.createElement('script');
+            scriptTarget.type = 'application/ld+json';
+            scriptTarget.text = JSON.stringify(schemaData);
+            document.head.appendChild(scriptTarget);
+
             // Image Zoom Logic
             if (mainImg && mainImgWrapper) {
                 mainImgWrapper.addEventListener('mousemove', function (e) {
