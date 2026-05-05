@@ -139,6 +139,9 @@ const products = [
     { id: 'e17', name: 'Earring Set 17', category: 'earrings', price: 120, image: 'Earring Set 17.webp', images: ['Earring Set 17.webp'] },
     { id: 'e18', name: 'Earring Set 18', category: 'earrings', price: 120, image: 'Earring Set 18.webp', images: ['Earring Set 18.webp'] },
     { id: 'e19', name: 'Earring Set 19', category: 'earrings', price: 120, image: 'Earring Set 19.webp', images: ['Earring Set 19.webp'] },
+    { id: 'e20', name: 'Earring Set 20', category: 'earrings', price: 80, image: 'earring set 20.webp', images: ['earring set 20.webp'] },
+    { id: 'e21', name: 'Earring Set 21', category: 'earrings', price: 80, image: 'earring set 21.webp', images: ['earring set 21.webp'] },
+    { id: 'e22', name: 'Earring Set 22', category: 'earrings', price: 50, image: 'earring set 22.webp', images: ['earring set 22.webp'] },
 
     // NEW ARRIVALS (n1 - n7)
     { id: 'n1', name: 'New Arrival 1', category: 'new-arrivals', price: 220, image: 'new-prod-2.webp', images: ['new-prod-2.webp'] },
