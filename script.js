@@ -95,6 +95,13 @@ const products = [
     { id: 'b86', name: 'Bangle Set 86', category: 'bangles', price: 120, image: 'Bangle Set 86.webp', images: ['Bangle Set 86.webp'], hasSize: true },
     { id: 'b87', name: 'Bangle Set 87', category: 'bangles', price: 280, image: 'Bangle Set 87.webp', images: ['Bangle Set 87.webp'], hasSize: true },
     { id: 'b88', name: 'Bangle Set 88', category: 'bangles', price: 300, image: 'Bangle Set 88.webp', images: ['Bangle Set 88.webp'], hasSize: true },
+    { id: 'b89', name: 'Bangle Set 89', category: 'bangles', price: 130, image: 'Bangle Set 89.webp', images: ['Bangle Set 89.webp'], hasSize: true },
+    { id: 'b90', name: 'Bangle Set 90', category: 'bangles', price: 130, image: 'Bangle Set 90.webp', images: ['Bangle Set 90.webp'], hasSize: true },
+    { id: 'b91', name: 'Bangle Set 91', category: 'bangles', price: 120, image: 'Bangle Set 91.webp', images: ['Bangle Set 91.webp', 'Bangle Set 91A.webp'], hasSize: true },
+    { id: 'b92', name: 'Bangle Set 92', category: 'bangles', price: 150, image: 'Bangle Set 92.webp', images: ['Bangle Set 92.webp', 'Bangle Set 92A.webp'], hasSize: true },
+    { id: 'b93', name: 'Bangle Set 93', category: 'bangles', price: 120, image: 'Bangle Set 93.webp', images: ['Bangle Set 93.webp'], hasSize: true },
+    { id: 'b94', name: 'Bangle Set 94', category: 'bangles', price: 150, image: 'Bangle Set 94.webp', images: ['Bangle Set 94.webp', 'Bangle Set 94A.webp'], hasSize: true },
+    { id: 'b95', name: 'Bangle Set 95', category: 'bangles', price: 120, image: 'Bangle Set 95.webp', images: ['Bangle Set 95.webp'], hasSize: true },
 
     // BRACELET BANGLES (bb1 - bb6)
     { id: 'bb1', name: 'Bracelet Bangle 1', category: 'bracelet-bangles', price: 175, image: 'mordern-churi.webp', images: ['mordern-churi.webp'], hasSize: true },
@@ -118,6 +125,7 @@ const products = [
     { id: 'r11', name: 'Ring Collection 11', category: 'rings', price: 100, image: 'ring 4.webp', images: ['ring 4.webp'], hasSize: true },
     { id: 'r12', name: 'Ring Collection 12', category: 'rings', price: 75, image: 'ring 5.webp', images: ['ring 5.webp'], hasSize: true },
     { id: 'r13', name: 'Ring Collection 13', category: 'rings', price: 120, image: 'Ring Collection 13.webp', images: ['Ring Collection 13.webp'], hasSize: true },
+    { id: 'r14', name: 'Ring Collection 14', category: 'rings', price: 100, image: 'Ring Collection 14.webp', images: ['Ring Collection 14.webp', 'Ring Collection 14A.webp'], hasSize: true },
 
     // EARRINGS (e1 - e5)
     { id: 'e1', name: 'Earring Set 1', category: 'earrings', price: 180, image: 'new-prod-1.webp', images: ['new-prod-1.webp'] },
@@ -142,6 +150,9 @@ const products = [
     { id: 'e20', name: 'Earring Set 20', category: 'earrings', price: 80, image: 'earring set 20.webp', images: ['earring set 20.webp'] },
     { id: 'e21', name: 'Earring Set 21', category: 'earrings', price: 80, image: 'earring set 21.webp', images: ['earring set 21.webp'] },
     { id: 'e22', name: 'Earring Set 22', category: 'earrings', price: 50, image: 'earring set 22.webp', images: ['earring set 22.webp'] },
+    { id: 'e23', name: 'Earring Set 23', category: 'earrings', price: 150, image: 'Earring Set 23.webp', images: ['Earring Set 23.webp'] },
+    { id: 'e24', name: 'Earring Set 24', category: 'earrings', price: 150, image: 'Earring Set 24.webp', images: ['Earring Set 24.webp'] },
+    { id: 'e25', name: 'Earring Set 25', category: 'earrings', price: 300, image: 'Earring Set 25.webp', images: ['Earring Set 25.webp'] },
 
     // NEW ARRIVALS (n1 - n7)
     { id: 'n1', name: 'New Arrival 1', category: 'new-arrivals', price: 220, image: 'new-prod-2.webp', images: ['new-prod-2.webp'] },
